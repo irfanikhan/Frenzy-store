@@ -1,5 +1,6 @@
 import React from 'react';
 import { FlatList, Image, SafeAreaView, Text, View } from 'react-native';
+import Header from 'src/common/Header/Header';
 import Layout from 'src/utils/Layout';
 import { useFetchProducts } from './queries/fetchProducts';
 
@@ -7,16 +8,18 @@ const HomePage = () => {
   const { products } = useFetchProducts();
 
   return (
-    <SafeAreaView>
-      <View style={{ marginHorizontal: 20 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+      <Header name='Home' />
+      <View style={{ flex: 1, marginHorizontal: 15 }}>
         <FlatList
           data={products}
           numColumns={2}
           renderItem={({ item }) => (
-            <View style={{ width: Layout.item_width }}>
+            <View style={{ flex: 1, width: Layout.item_width }}>
               <Image
-                style={{ width: Layout.item_width - 10 }}
+                style={{ height: Layout.item_width - 10 }}
                 source={{ uri: item.featuredPhoto }}
+                resizeMode="contain"
               />
               <Text>{item.name}</Text>
             </View>
