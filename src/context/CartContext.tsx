@@ -11,7 +11,9 @@ interface CartContextProps {
   setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
   addItem: (product: Product) => void;
   removeItem: (product: Product) => void;
+  getProductQuantity: (id: string) => number;
 }
+
 export const CartContext = createContext<CartContextProps>({} as CartContextProps);
 
 interface ProviderProps {
@@ -20,6 +22,10 @@ interface ProviderProps {
 
 export const CartContextProvider = ({ children }: ProviderProps): ReactElement => {
   const [products, setProducts] = useState<Product[]>([]);
+
+  const getProductQuantity = (productId: string) => {
+    return products.find(prod => prod.id === productId)?.quantity || 0
+  }
 
   const addItem = (product: Product) => {
     const prod = products.find((prod) => prod.id === product.id);
@@ -42,7 +48,7 @@ export const CartContextProvider = ({ children }: ProviderProps): ReactElement =
   }
 
   return (
-    <CartContext.Provider value={{ products, setProducts, addItem, removeItem }}>
+    <CartContext.Provider value={{ products, setProducts, addItem, removeItem, getProductQuantity }}>
       {children}
     </CartContext.Provider>
   );
