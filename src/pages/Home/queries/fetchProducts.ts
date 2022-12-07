@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import makeRequest from 'src/utils/request';
+import makeRequest from '@utils/request';
 
 const fetchProducts = () => {
   return makeRequest({ endpoint: 'products', method: 'GET' });

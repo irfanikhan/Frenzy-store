@@ -1,2 +1,2 @@
-import { AuthContextProvider } from './AuthContext';
-export { CartContextProvider } from './CartContext';
+export { AuthContextProvider } from './AuthContext';
+export { CartContextProvider, CartContext } from './CartContext';

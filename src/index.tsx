@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator();
 
 export interface ScreenOptions {
   navigation?: any;
-  routes?: any;
+  route?: any;
 }
 
 const queryClient = new QueryClient();

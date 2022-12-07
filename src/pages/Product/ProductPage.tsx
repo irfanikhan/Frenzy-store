@@ -1,38 +1,52 @@
 import React, { useContext } from 'react';
-import { Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
-import Icon  from 'react-native-vector-icons/Ionicons';
-import { CartContext } from 'src/context/CartContext';
+import { Text } from 'react-native';
+import { CartContext } from '../../context';
 import { ScreenOptions } from 'src/index';
-import Layout from 'src/utils/Layout';
+import CartButton from './components/CartButton';
+import {
+  CartUpdateView,
+  Name,
+  PageContainer,
+  ProductContent,
+  ProductImage,
+  Quantity,
+  ViewContainer,
+} from './styles';
+import { Header } from 'src/common';
 
-const ProductPage = ({ routes }: ScreenOptions) => {
-  const product = routes.params.product;
-  const { products, getProductQuantity } = useContext(CartContext);
+const ProductPage = ({ route }: ScreenOptions) => {
+  const product = route.params.product;
+  const { getQuantity, addItem, decreaseQuantity } = useContext(CartContext);
 
-  console.log(product)
+  // TODO: Create query to fetch product details
+  // const { product } = useFetchProduct({ id: product.id });
+
+  console.log(product.id, ' : ', getQuantity(product.id))
+
+  const increaseQuantity = () => {
+    addItem(product);
+  };
+
+  const decQuantity = () => {
+    decreaseQuantity(product);
+  };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ flex: 1 }}>
-        <Image
-          style={{ height: Layout.screen_height / 3, width: Layout.screen_width }}
-          resizeMode="cover"
-          source={{ uri: product.featuredPhoto }}
-        />
-        <View style={{ margin: 20 }}>
-          <Text style={{ fontSize: 17 }}>{product.name}</Text>
-          <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-            <TouchableOpacity>
-              <Icon name='add-outline' />
-            </TouchableOpacity>
-            <Text>{getProductQuantity(product?.id)}</Text>
-            <TouchableOpacity>
-              <Icon name='remove-outline' />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-    </SafeAreaView>
+    <PageContainer>
+      <ViewContainer>
+        <Header name={product.name} navBack />
+        <ProductImage resizeMode="cover" source={{ uri: product.featuredPhoto }} />
+        <ProductContent>
+          <Name>{product.name}</Name>
+          <Text>{product?.description}</Text>
+          <CartUpdateView>
+            <CartButton onPress={increaseQuantity} icon="add-outline" />
+            <Quantity>{getQuantity(product?.id)}</Quantity>
+            <CartButton onPress={decQuantity} icon="remove-outline" />
+          </CartUpdateView>
+        </ProductContent>
+      </ViewContainer>
+    </PageContainer>
   );
 };
 

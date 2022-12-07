@@ -1,35 +1,31 @@
+import { Header } from '@common/index';
 import React from 'react';
-import { FlatList, Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
-import Header from 'src/common/Header/Header';
+import { FlatList, TouchableOpacity } from 'react-native';
 import { ScreenOptions } from 'src/index';
-import Layout from 'src/utils/Layout';
 import { useFetchProducts } from './queries/fetchProducts';
+import { ItemImage, ItemName, PageContainer, ItemContainer, ViewContainer } from './styles';
 
 const HomePage = ({ navigation }: ScreenOptions) => {
   const { products } = useFetchProducts();
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+    <PageContainer>
       <Header name="Home" />
-      <View style={{ flex: 1, marginHorizontal: 15 }}>
+      <ViewContainer>
         <FlatList
           data={products}
           numColumns={2}
           renderItem={({ item }) => (
             <TouchableOpacity onPress={() => navigation.navigate('Product', { product: item })}>
-              <View style={{ flex: 1, width: Layout.item_width }}>
-                <Image
-                  style={{ height: Layout.item_width - 10 }}
-                  source={{ uri: item.featuredPhoto }}
-                  resizeMode="contain"
-                />
-                <Text>{item.name}</Text>
-              </View>
+              <ItemContainer>
+                <ItemImage source={{ uri: item.featuredPhoto }} resizeMode="contain" />
+                <ItemName>{item.name}</ItemName>
+              </ItemContainer>
             </TouchableOpacity>
           )}
         />
-      </View>
-    </SafeAreaView>
+      </ViewContainer>
+    </PageContainer>
   );
 };
 
