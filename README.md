@@ -2,7 +2,8 @@
 ## Follow the steps to run the application
 
 - Clone this repo
-- `yarn install`
+- Navigate to the cloned repo
+- Run command `yarn `
 - `cd ios && pod install`
 - `npm i -g json-server`
 - To run the fake server `yarn dev`
