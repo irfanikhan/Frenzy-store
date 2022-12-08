@@ -8,7 +8,7 @@
 - `npm i -g json-server`
 - To run the fake server `yarn dev`
 
-### To run the app in iOS device
+### To run the app in iOS
 - `yarn ios` or run the application in xcode
 
 ### To run the app in android
