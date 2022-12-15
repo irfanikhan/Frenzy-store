@@ -1,5 +1,8 @@
+# React Native Application
 
-# Follow the steps to run the application
+To run the application locally, you must have setup development environment https://reactnative.dev/docs/environment-setup
+
+## Follow the steps to run the application
 
 - Clone this repo
 - Navigate to the cloned repo
